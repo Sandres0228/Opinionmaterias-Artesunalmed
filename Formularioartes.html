@@ -1,0 +1,1604 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Opiniones de Asignaturas – Artes UNAL</title>
+
+<!-- Google Fonts -->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+<style>
+    :root {
+        --primary-color: #6a11cb;
+        --secondary-color: #2575fc;
+        --accent-color: #ff7e5f;
+        --light-color: #f8f9fa;
+        --dark-color: #2d3748;
+        --success-color: #28a745;
+        --warning-color: #ffc107;
+        --danger-color: #dc3545;
+        --gray-light: #e9ecef;
+        --gray-medium: #adb5bd;
+        --shadow: 0 4px 20px rgba(0, 0, 0, 0.12);
+        --radius: 16px;
+        --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+
+    * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+    }
+
+    body {
+        font-family: 'Montserrat', sans-serif;
+        background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+        min-height: 100vh;
+        padding: 20px;
+        color: var(--dark-color);
+        font-weight: 400;
+    }
+
+    .contenedor {
+        max-width: 950px;
+        margin: 0 auto;
+        background: white;
+        border-radius: var(--radius);
+        box-shadow: var(--shadow);
+        overflow: hidden;
+        padding: 40px;
+        position: relative;
+    }
+
+    .header-decor {
+        height: 8px;
+        background: linear-gradient(to right, var(--primary-color), var(--secondary-color), var(--accent-color));
+        margin: -40px -40px 30px -40px;
+        border-radius: var(--radius) var(--radius) 0 0;
+    }
+
+    h1, h2 {
+        text-align: center;
+        margin-bottom: 25px;
+        font-weight: 700;
+    }
+
+    h1 {
+        font-size: 2.4rem;
+        background: linear-gradient(to right, var(--primary-color), var(--secondary-color));
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        background-clip: text;
+        letter-spacing: -0.5px;
+    }
+
+    h2 {
+        font-size: 1.9rem;
+        color: var(--dark-color);
+        letter-spacing: -0.3px;
+    }
+
+    h3 {
+        margin-top: 28px;
+        margin-bottom: 18px;
+        font-size: 18px;
+        color: var(--primary-color);
+        padding-bottom: 10px;
+        border-bottom: 2px solid var(--gray-light);
+        font-weight: 600;
+    }
+
+    p {
+        font-size: 15px;
+        color: #555;
+        line-height: 1.6;
+        margin-bottom: 18px;
+        font-weight: 400;
+    }
+
+    .card {
+        background: var(--light-color);
+        border-radius: var(--radius);
+        padding: 25px;
+        margin-bottom: 30px;
+        border-left: 6px solid var(--primary-color);
+        transition: var(--transition);
+        border: 1px solid rgba(0, 0, 0, 0.08);
+    }
+
+    .card:hover {
+        transform: translateY(-3px);
+        box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
+    }
+
+    .highlight-card {
+        background: linear-gradient(135deg, rgba(106, 17, 203, 0.08), rgba(37, 117, 252, 0.08));
+        border: 2px solid var(--primary-color);
+        padding: 25px;
+        border-radius: var(--radius);
+        margin: 25px 0;
+        text-align: center;
+        position: relative;
+        overflow: hidden;
+    }
+
+    .highlight-card::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        height: 4px;
+        background: linear-gradient(to right, var(--primary-color), var(--secondary-color));
+    }
+
+    .highlight-card h2 {
+        color: var(--primary-color);
+        margin-bottom: 10px;
+        font-size: 1.8rem;
+    }
+
+    .highlight-card .materia-nombre {
+        font-size: 1.4rem;
+        color: var(--dark-color);
+        font-weight: 600;
+        margin-top: 10px;
+        padding: 12px;
+        background: white;
+        border-radius: 12px;
+        display: inline-block;
+        border: 2px solid var(--gray-light);
+    }
+
+    label {
+        display: block;
+        margin: 15px 0 8px;
+        font-size: 15px;
+        font-weight: 500;
+        color: var(--dark-color);
+    }
+
+    .input-group {
+        margin-bottom: 25px;
+    }
+
+    .input-group label {
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        margin-bottom: 10px;
+    }
+
+    .input-group .icon {
+        color: var(--primary-color);
+        font-size: 18px;
+    }
+
+    input[type="email"], select, textarea, button {
+        width: 100%;
+        padding: 16px 20px;
+        margin-top: 8px;
+        font-size: 15px;
+        border: 2px solid var(--gray-light);
+        border-radius: var(--radius);
+        transition: var(--transition);
+        font-family: 'Montserrat', sans-serif;
+        font-weight: 400;
+    }
+
+    input[type="email"]:focus, select:focus, textarea:focus {
+        outline: none;
+        border-color: var(--primary-color);
+        box-shadow: 0 0 0 4px rgba(106, 17, 203, 0.15);
+    }
+
+    input[type="email"] {
+        background: white;
+    }
+
+    textarea {
+        resize: vertical;
+        min-height: 120px;
+        line-height: 1.5;
+    }
+
+    .tag {
+        display: inline-flex;
+        align-items: center;
+        background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+        color: white;
+        padding: 12px 20px;
+        border-radius: 30px;
+        margin: 10px 10px 10px 0;
+        font-size: 14px;
+        cursor: pointer;
+        transition: var(--transition);
+        box-shadow: 0 4px 12px rgba(106, 17, 203, 0.25);
+        font-weight: 500;
+    }
+
+    .tag:hover {
+        transform: translateY(-2px) scale(1.05);
+        box-shadow: 0 6px 18px rgba(106, 17, 203, 0.35);
+    }
+
+    .tag .close {
+        margin-left: 12px;
+        font-weight: bold;
+        font-size: 18px;
+        opacity: 0.8;
+        transition: var(--transition);
+    }
+
+    .tag:hover .close {
+        opacity: 1;
+        transform: scale(1.2);
+    }
+
+    .contador, .progreso {
+        text-align: center;
+        font-size: 15px;
+        color: var(--gray-medium);
+        margin-top: 20px;
+        padding: 15px;
+        background: var(--light-color);
+        border-radius: var(--radius);
+        font-weight: 500;
+    }
+
+    .progreso {
+        font-weight: 600;
+        color: var(--primary-color);
+        background: rgba(106, 17, 203, 0.1);
+        border: 2px solid rgba(106, 17, 203, 0.2);
+    }
+
+    .boton {
+        background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+        color: white;
+        border: none;
+        padding: 18px 28px;
+        margin-top: 30px;
+        cursor: pointer;
+        border-radius: var(--radius);
+        font-size: 16px;
+        font-weight: 600;
+        transition: var(--transition);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 12px;
+        box-shadow: 0 6px 20px rgba(106, 17, 203, 0.3);
+        letter-spacing: 0.3px;
+    }
+
+    .boton:hover {
+        transform: translateY(-3px);
+        box-shadow: 0 10px 25px rgba(106, 17, 203, 0.4);
+        background: linear-gradient(135deg, var(--secondary-color), var(--primary-color));
+    }
+
+    .boton:active {
+        transform: translateY(-1px);
+    }
+
+    .boton:disabled {
+        opacity: 0.6;
+        cursor: not-allowed;
+        transform: none;
+    }
+
+    .boton-sec {
+        background: white;
+        color: var(--primary-color);
+        border: 2px solid var(--primary-color);
+        box-shadow: none;
+    }
+
+    .boton-sec:hover {
+        background: var(--primary-color);
+        color: white;
+        border-color: var(--primary-color);
+    }
+
+    .botones-container {
+        display: flex;
+        gap: 20px;
+        margin-top: 35px;
+    }
+
+    .botones-container button {
+        flex: 1;
+    }
+
+    .estrellas {
+        display: flex;
+        justify-content: center;
+        gap: 12px;
+        margin: 20px 0 30px;
+    }
+
+    .estrellas span {
+        font-size: 38px;
+        color: var(--gray-light);
+        cursor: pointer;
+        transition: var(--transition);
+        text-shadow: 0 3px 8px rgba(0,0,0,0.15);
+    }
+
+    .estrellas span:hover {
+        transform: scale(1.3);
+    }
+
+    .estrellas span.activa {
+        color: var(--warning-color);
+        text-shadow: 0 0 20px rgba(255, 193, 7, 0.4);
+    }
+
+    .rating-label {
+        text-align: center;
+        font-size: 15px;
+        color: var(--gray-medium);
+        margin-top: -15px;
+        margin-bottom: 25px;
+        font-weight: 500;
+    }
+
+    .oculto {
+        display: none !important;
+    }
+
+    .checkbox-group, .radio-group {
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+        gap: 15px;
+        margin-top: 15px;
+    }
+
+    .checkbox-item, .radio-item {
+        background: white;
+        border: 2px solid var(--gray-light);
+        border-radius: var(--radius);
+        padding: 18px;
+        cursor: pointer;
+        transition: var(--transition);
+        display: flex;
+        align-items: center;
+        font-weight: 500;
+    }
+
+    .checkbox-item:hover, .radio-item:hover {
+        border-color: var(--primary-color);
+        background: rgba(106, 17, 203, 0.05);
+        transform: translateY(-2px);
+    }
+
+    .checkbox-item.checked, .radio-item.checked {
+        border-color: var(--primary-color);
+        background: rgba(106, 17, 203, 0.1);
+        box-shadow: 0 4px 12px rgba(106, 17, 203, 0.15);
+    }
+
+    .checkbox-item input, .radio-item input {
+        margin-right: 15px;
+        transform: scale(1.3);
+        cursor: pointer;
+    }
+
+    .descripcion-opcion {
+        background: rgba(37, 117, 252, 0.1);
+        border-radius: var(--radius);
+        padding: 18px;
+        margin-top: 15px;
+        margin-bottom: 25px;
+        border-left: 6px solid var(--secondary-color);
+        font-size: 14px;
+        color: var(--dark-color);
+        animation: fadeIn 0.3s ease;
+        line-height: 1.6;
+    }
+
+    @keyframes fadeIn {
+        from { opacity: 0; transform: translateY(-10px); }
+        to { opacity: 1; transform: translateY(0); }
+    }
+
+    .required {
+        color: var(--danger-color);
+        margin-left: 4px;
+        font-weight: bold;
+    }
+
+    .error-message {
+        color: var(--danger-color);
+        font-size: 14px;
+        margin-top: 8px;
+        padding: 10px 15px;
+        background: rgba(220, 53, 69, 0.1);
+        border-radius: var(--radius);
+        border-left: 4px solid var(--danger-color);
+        display: none;
+        font-weight: 500;
+    }
+
+    .logo {
+        text-align: center;
+        margin-bottom: 25px;
+    }
+
+    .logo h1 {
+        display: inline-flex;
+        align-items: center;
+        gap: 15px;
+        font-size: 2.6rem;
+        margin-bottom: 10px;
+    }
+
+    .logo-icon {
+        font-size: 3rem;
+        animation: float 3s ease-in-out infinite;
+    }
+
+    @keyframes float {
+        0%, 100% { transform: translateY(0); }
+        50% { transform: translateY(-10px); }
+    }
+
+    .info-box {
+        background: linear-gradient(135deg, rgba(106, 17, 203, 0.1), rgba(37, 117, 252, 0.1));
+        border-radius: var(--radius);
+        padding: 25px;
+        margin: 25px 0;
+        text-align: center;
+        border: 2px dashed var(--primary-color);
+        font-weight: 500;
+    }
+
+    .input-otro-docente {
+        margin-top: 15px;
+        animation: slideDown 0.3s ease;
+    }
+
+    @keyframes slideDown {
+        from { opacity: 0; transform: translateY(-10px); }
+        to { opacity: 1; transform: translateY(0); }
+    }
+
+    @media (max-width: 768px) {
+        .contenedor {
+            padding: 25px;
+            margin: 10px;
+        }
+        
+        .header-decor {
+            margin: -25px -25px 20px -25px;
+        }
+        
+        h1 {
+            font-size: 2rem;
+        }
+        
+        h2 {
+            font-size: 1.6rem;
+        }
+        
+        .checkbox-group, .radio-group {
+            grid-template-columns: 1fr;
+        }
+        
+        .botones-container {
+            flex-direction: column;
+        }
+        
+        .estrellas span {
+            font-size: 32px;
+        }
+        
+        .highlight-card .materia-nombre {
+            font-size: 1.2rem;
+            padding: 10px;
+        }
+        
+        input[type="email"], select, textarea, button {
+            padding: 14px 18px;
+        }
+    }
+
+    .completion-message {
+        text-align: center;
+        padding: 50px 20px;
+    }
+
+    .completion-message h1 {
+        margin-bottom: 25px;
+    }
+
+    .completion-icon {
+        font-size: 100px;
+        margin-bottom: 35px;
+        color: var(--success-color);
+        animation: bounce 2s infinite;
+    }
+
+    @keyframes bounce {
+        0%, 100% { transform: translateY(0); }
+        50% { transform: translateY(-20px); }
+    }
+
+    .data-summary {
+        background: var(--light-color);
+        border-radius: var(--radius);
+        padding: 25px;
+        margin-top: 35px;
+        border: 2px solid var(--gray-light);
+        text-align: left;
+    }
+
+    .data-summary h3 {
+        color: var(--secondary-color);
+        text-align: center;
+        margin-top: 0;
+    }
+
+    .respuesta-item {
+        background: white;
+        border-radius: 12px;
+        padding: 20px;
+        margin-bottom: 20px;
+        border-left: 4px solid var(--primary-color);
+        box-shadow: 0 3px 10px rgba(0,0,0,0.08);
+    }
+
+    .respuesta-item h4 {
+        color: var(--primary-color);
+        margin-bottom: 15px;
+        font-size: 1.2rem;
+        font-weight: 600;
+    }
+
+    .respuesta-detalle {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+        gap: 15px;
+        margin-top: 10px;
+    }
+
+    .respuesta-detalle p {
+        margin: 8px 0;
+        font-size: 14px;
+    }
+
+    .respuesta-detalle strong {
+        color: var(--dark-color);
+    }
+
+    .representantes-info {
+        background: linear-gradient(135deg, rgba(106, 17, 203, 0.05), rgba(37, 117, 252, 0.05));
+        border-radius: var(--radius);
+        padding: 20px;
+        margin-top: 30px;
+        border: 1px solid rgba(106, 17, 203, 0.2);
+        text-align: center;
+    }
+
+    .representantes-info h4 {
+        color: var(--primary-color);
+        margin-bottom: 15px;
+        font-weight: 600;
+    }
+
+    .email-validation {
+        position: relative;
+    }
+
+    .email-validation .validation-icon {
+        position: absolute;
+        right: 20px;
+        top: 55%;
+        transform: translateY(-50%);
+        font-size: 20px;
+        display: none;
+    }
+
+    .email-validation .validation-icon.valid {
+        color: var(--success-color);
+        display: block;
+    }
+
+    .email-validation .validation-icon.invalid {
+        color: var(--danger-color);
+        display: block;
+    }
+
+    .paso-email {
+        text-align: center;
+    }
+
+    .paso-email .logo {
+        margin-bottom: 30px;
+    }
+
+    .email-instructions {
+        font-size: 14px;
+        color: var(--gray-medium);
+        margin-top: 10px;
+        text-align: center;
+    }
+</style>
+</head>
+
+<body>
+
+<div class="contenedor">
+    <div class="header-decor"></div>
+
+    <!-- PASO EMAIL -->
+    <div id="pasoEmail">
+        <div class="paso-email">
+            <div class="logo">
+                <h1><span class="logo-icon">🎨</span> Opiniones Artes UNAL</h1>
+            </div>
+            
+            <div class="info-box">
+                <p><strong>¡Bienvenido estudiante UNAL!</strong></p>
+                <p>Tu opinión es valiosa para mejorar la experiencia académica de toda la comunidad.</p>
+            </div>
+
+            <h2>Verificación de correo institucional</h2>
+            <p>Por favor ingresa tu correo institucional para continuar:</p>
+            
+            <div class="card">
+                <div class="input-group email-validation">
+                    <label for="correoInstitucional">
+                        <span class="icon">📧</span> Correo institucional UNAL
+                        <span class="required">*</span>
+                    </label>
+                    <input type="email" id="correoInstitucional" 
+                           placeholder="pepitoperez@unal.edu.co"
+                           oninput="validarCorreo(this.value)">
+                    <span class="validation-icon valid">✓</span>
+                    <span class="validation-icon invalid">✗</span>
+                    <div class="error-message" id="errorCorreo">El correo debe terminar en @unal.edu.co</div>
+                </div>
+                
+                <p class="email-instructions">
+                    Solo se permiten correos institucionales de la Universidad Nacional de Colombia.
+                    Ejemplo: nombre.apellido@unal.edu.co
+                </p>
+                
+                <button class="boton" onclick="verificarCorreo()" id="btnContinuarCorreo" disabled>
+                    <span>👉</span> Continuar a selección de asignaturas
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- PANTALLA FINAL -->
+    <div id="pantallaFinal" class="oculto">
+        <div class="completion-message">
+            <div class="completion-icon">🎨</div>
+            <h1>¡Gracias por tu participación! 🤍</h1>
+            <p>
+                Tu opinión es invaluable para la comunidad estudiantil. 
+                Estos datos ayudarán a futuros estudiantes a tomar decisiones más informadas 
+                sobre su trayectoria académica.
+            </p>
+            
+            <div class="representantes-info">
+                <h4>¿Más información o sugerencias?</h4>
+                <p>Puedes contactar a tus representantes estudiantiles:</p>
+                <p><strong>Santiago Andrés Tuberquia</strong> y <strong>Santiago Mejía Corredor</strong></p>
+                <p style="margin-top: 10px; font-size: 14px; color: var(--gray-medium);">
+                    Están disponibles para escuchar tus inquietudes y mejorar esta iniciativa.
+                </p>
+            </div>
+
+            <div class="info-box">
+                <p><strong>¡Comparte esta herramienta con tus compañeros!</strong></p>
+                <p>Cuantas más opiniones tengamos, más útil será para todos.</p>
+            </div>
+            
+            <div class="data-summary">
+                <h3>Resumen de tus respuestas</h3>
+                <div id="resumenRespuestas"></div>
+            </div>
+            
+            <button class="boton" onclick="reiniciar()">
+                <span>📝</span> Llenar otro formulario
+            </button>
+        </div>
+    </div>
+
+    <!-- PASO 1: SELECCIÓN -->
+    <div id="pasoSeleccion" class="oculto">
+        <div class="logo">
+            <h1><span class="logo-icon">🎨</span> Opiniones Artes UNAL</h1>
+            <p>Estudiante: <strong id="correoMostrado"></strong></p>
+        </div>
+        
+        <div class="info-box">
+            <p><strong>¿Cómo funciona?</strong></p>
+            <p>1. Selecciona hasta 5 asignaturas que hayas cursado</p>
+            <p>2. Da tu opinión sobre cada una</p>
+            <p>3. ¡Comparte y ayuda a la comunidad!</p>
+        </div>
+
+        <h2>Selecciona hasta 5 asignaturas</h2>
+        <p>Elige las materias sobre las que quieres dar tu opinión:</p>
+
+        <div class="card">
+            <label for="selectAsignaturas"><strong>Buscar asignatura:</strong></label>
+            <select id="selectAsignaturas">
+                <option value="">— Selecciona una asignatura —</option>
+
+                <!-- LISTA COMPLETA -->
+                <option>Aproximación a los procesos cerámicos (3010611)</option>
+                <option>Arte y archivo (3009874)</option>
+                <option>Arte y ciudad: de la escultura expandida al colectivismo y la participación (3010614)</option>
+                <option>Arte y documento (3009875)</option>
+                <option>Básico espacio I (3009837)</option>
+                <option>Básico espacio II (3009838)</option>
+                <option>Básico imagen I (3010734)</option>
+                <option>Básico imagen II (3010735)</option>
+                <option>Herramientas digitales I (3009879)</option>
+                <option>Herramientas digitales II (3009880)</option>
+                <option>Historia del arte I (3006669)</option>
+                <option>Historia del arte II (3010698)</option>
+                <option>Historia del arte III (3006671)</option>
+                <option>Historia del performance I (3010609)</option>
+                <option>Historia del performance II (3010608)</option>
+                <option>Laboratorio de dibujo I (3009841)</option>
+                <option>Laboratorio de dibujo II (3009842)</option>
+                <option>Laboratorio de escultura I (3009843)</option>
+                <option>Laboratorio de escultura II (3009844)</option>
+                <option>Laboratorio de fotografía I (3010736)</option>
+                <option>Laboratorio de fotografía II (3010737)</option>
+                <option>Laboratorio de gráfica I (3006683)</option>
+                <option>Laboratorio de gráfica II (3009882)</option>
+                <option>Laboratorio de medios no tradicionales (3009885)</option>
+                <option>Laboratorio de pintura I (3009848)</option>
+                <option>Laboratorio de pintura II (3009849)</option>
+                <option>Laboratorio de técnicas gráficas (3009887)</option>
+                <option>Laboratorio de técnicas pictóricas (3009888)</option>
+                <option>Laboratorio de video I (3009850)</option>
+                <option>Laboratorio de video II (3009851)</option>
+                <option>Prácticas artísticas contemporáneas en Colombia (3010636)</option>
+                <option>Prácticas artísticas I (3009852)</option>
+                <option>Prácticas artísticas II (3009853)</option>
+                <option>Realización documental (3009892)</option>
+                <option>Seminario I (3009854)</option>
+                <option>Seminario II (3006700)</option>
+                <option>Seminario III (3006701)</option>
+                <option>Seminario de investigación I (3009855)</option>
+                <option>Seminario de investigación II (3009856)</option>
+                <option>Taller II (3009858)</option>
+                <option>Taller III (3009859)</option>
+                <option>Taller IV (3009860)</option>
+                <option>Taller V (3009861)</option>
+                <option>Taller VI (3009862)</option>
+                <option>Taller VII (3009863)</option>
+            </select>
+
+            <div id="listaAsignaturas" style="margin-top: 25px;"></div>
+            <div class="contador" id="contador">0 / 5 seleccionadas</div>
+        </div>
+
+        <button class="boton" onclick="iniciar()" id="btnContinuarAsignaturas" disabled>
+            <span>👉</span> Continuar a opiniones
+        </button>
+    </div>
+
+    <!-- PASO 2: FORMULARIO -->
+    <div id="pasoFormulario" class="oculto">
+        <div class="progreso" id="progreso"></div>
+        
+        <div class="highlight-card">
+            <h2>💬 Opinando sobre:</h2>
+            <div class="materia-nombre" id="tituloAsignatura"></div>
+            <p style="margin-top: 15px; color: var(--gray-medium); font-size: 14px;">
+                Todos los campos son obligatorios excepto los comentarios escritos
+            </p>
+        </div>
+
+        <form id="formularioAsignatura">
+            <!-- BLOQUE GENERAL (NO TALLER) -->
+            <div id="bloqueGeneral">
+                <div class="card">
+                    <h3>Enfoque de la asignatura <span class="required">*</span></h3>
+                    <div class="checkbox-group">
+                        <div class="checkbox-item" onclick="toggleCheckbox(this)">
+                            <input type="checkbox" name="enfoque" value="Teórica" onchange="mostrarDescripcion('teorica')">
+                            <span>Teórica</span>
+                        </div>
+                        <div class="checkbox-item" onclick="toggleCheckbox(this)">
+                            <input type="checkbox" name="enfoque" value="Investigación" onchange="mostrarDescripcion('investigacion')">
+                            <span>Investigación</span>
+                        </div>
+                        <div class="checkbox-item" onclick="toggleCheckbox(this)">
+                            <input type="checkbox" name="enfoque" value="Técnica" onchange="mostrarDescripcion('tecnica')">
+                            <span>Técnica</span>
+                        </div>
+                    </div>
+                    <div id="descripcionEnfoque" class="descripcion-opcion oculto"></div>
+                    <div class="error-message" id="errorEnfoque">Debes seleccionar al menos un enfoque</div>
+
+                    <h3>Modo de calificación <span class="required">*</span></h3>
+                    <div class="checkbox-group">
+                        <div class="checkbox-item" onclick="toggleCheckbox(this)">
+                            <input type="checkbox" name="calificacion" value="Prácticas y entregas físicas" onchange="mostrarDescripcion('practicas')">
+                            <span>Prácticas y entregas físicas</span>
+                        </div>
+                        <div class="checkbox-item" onclick="toggleCheckbox(this)">
+                            <input type="checkbox" name="calificacion" value="Entregas de proyectos" onchange="mostrarDescripcion('proyectos')">
+                            <span>Entregas de proyectos</span>
+                        </div>
+                        <div class="checkbox-item" onclick="toggleCheckbox(this)">
+                            <input type="checkbox" name="calificacion" value="Lecturas o exposiciones" onchange="mostrarDescripcion('lecturas')">
+                            <span>Lecturas o exposiciones</span>
+                        </div>
+                        <div class="checkbox-item" onclick="toggleCheckbox(this)">
+                            <input type="checkbox" name="calificacion" value="Reflexión y participación en clase" onchange="mostrarDescripcion('participacion')">
+                            <span>Reflexión y participación en clase</span>
+                        </div>
+                    </div>
+                    <div id="descripcionCalificacion" class="descripcion-opcion oculto"></div>
+                    <div class="error-message" id="errorCalificacion">Debes seleccionar al menos un modo de calificación</div>
+                </div>
+
+                <div class="card">
+                    <h3>Nivel de carga académica <span class="required">*</span></h3>
+                    <div class="radio-group">
+                        <div class="radio-item" onclick="seleccionarRadio(this, 'carga')">
+                            <input type="radio" name="carga" value="Baja">
+                            <span>Baja</span>
+                        </div>
+                        <div class="radio-item" onclick="seleccionarRadio(this, 'carga')">
+                            <input type="radio" name="carga" value="Media">
+                            <span>Media</span>
+                        </div>
+                        <div class="radio-item" onclick="seleccionarRadio(this, 'carga')">
+                            <input type="radio" name="carga" value="Alta">
+                            <span>Alta</span>
+                        </div>
+                    </div>
+                    <div class="error-message" id="errorCarga">Debes seleccionar el nivel de carga</div>
+
+                    <h3>Gasto económico <span class="required">*</span></h3>
+                    <div class="radio-group">
+                        <div class="radio-item" onclick="seleccionarRadio(this, 'gasto')">
+                            <input type="radio" name="gasto" value="Casi ninguno">
+                            <span>Casi ninguno</span>
+                        </div>
+                        <div class="radio-item" onclick="seleccionarRadio(this, 'gasto')">
+                            <input type="radio" name="gasto" value="Bajo">
+                            <span>Bajo</span>
+                        </div>
+                        <div class="radio-item" onclick="seleccionarRadio(this, 'gasto')">
+                            <input type="radio" name="gasto" value="Medio">
+                            <span>Medio</span>
+                        </div>
+                        <div class="radio-item" onclick="seleccionarRadio(this, 'gasto')">
+                            <input type="radio" name="gasto" value="Alto">
+                            <span>Alto</span>
+                        </div>
+                        <div class="radio-item" onclick="seleccionarRadio(this, 'gasto')">
+                            <input type="radio" name="gasto" value="Muy alto">
+                            <span>Muy alto</span>
+                        </div>
+                    </div>
+                    <div class="error-message" id="errorGasto">Debes seleccionar el nivel de gasto</div>
+                </div>
+
+                <div class="card">
+                    <h3>Valoración de la asignatura <span class="required">*</span></h3>
+                    <p class="rating-label">Califica del 1 al 5 estrellas</p>
+                    <div class="estrellas" id="estrellasAsignatura">
+                        <span onclick="calificar(1, 'asignatura')">★</span>
+                        <span onclick="calificar(2, 'asignatura')">★</span>
+                        <span onclick="calificar(3, 'asignatura')">★</span>
+                        <span onclick="calificar(4, 'asignatura')">★</span>
+                        <span onclick="calificar(5, 'asignatura')">★</span>
+                    </div>
+                    <div class="error-message" id="errorRatingAsignatura">Debes calificar la asignatura</div>
+
+                    <h3>Opinión sobre la asignatura (opcional)</h3>
+                    <textarea id="opinionAsignatura" placeholder="Escribe aquí tu experiencia personal, qué aprendiste, qué te gustó o qué mejorarías..."></textarea>
+                </div>
+            </div>
+
+            <!-- BLOQUE DOCENTE -->
+            <div id="bloqueDocente" class="card">
+                <h3>Docente <span class="required">*</span></h3>
+                <select id="docente" onchange="manejarCambioDocente()">
+                    <option value="">— Selecciona el docente —</option>
+                    <option>Camilo Rodríguez Castro</option>
+                    <option>Carolina Vélez Luján</option>
+                    <option>Catalina del Rocío Rojas Casallas</option>
+                    <option>Daniela Serna Gallego</option>
+                    <option>Edna Yulieth Sierra Duque</option>
+                    <option>Fernando Celimo Escobar Neira</option>
+                    <option>Gandra Carolina Chacón Bernal</option>
+                    <option>Hebert Rodríguez García</option>
+                    <option>Jairo Augusto Solórzano Ariza</option>
+                    <option>Jorge Alberto Rodríguez Salazarriaga</option>
+                    <option>Jorge Andrés Marín Vásquez</option>
+                    <option>Juan Guillermo Caicedo</option>
+                    <option>Luis Eduardo Serna</option>
+                    <option>María Angélica Teuta Echeverri</option>
+                    <option>María Isabel Naranjo Cano</option>
+                    <option>Miguel Ángel Flores Santander</option>
+                    <option>Nadia Ximena Lorena Moreno</option>
+                    <option>Natalia Echeverri Arango</option>
+                    <option>Natalia Isabel Pérez Villegas</option>
+                    <option>Óscar Mauricio Ardila Luna</option>
+                    <option>Paula Marcela Restrepo Cardona</option>
+                    <option>Paulina Escobar Aguirre</option>
+                    <option>Pedro Antonio Agudelo Rendón</option>
+                    <option>Sebastián Alexi Wiedemann</option>
+                    <option>Véronique Marie Christine Mondejar</option>
+                    <option value="otro">Otro (especificar)</option>
+                </select>
+                
+                <div id="inputOtroDocente" class="input-otro-docente oculto">
+                    <label for="nombreOtroDocente">Nombre del docente:</label>
+                    <input type="text" id="nombreOtroDocente" placeholder="Escribe el nombre completo del docente">
+                    <div class="error-message" id="errorOtroDocente">Debes escribir el nombre del docente</div>
+                </div>
+
+                <div class="error-message" id="errorDocente">Debes seleccionar un docente</div>
+
+                <h3 style="margin-top: 20px;">Valoración del docente <span class="required">*</span></h3>
+                <p class="rating-label">Califica del 1 al 5 estrellas</p>
+                <div class="estrellas" id="estrellasDocente">
+                    <span onclick="calificar(1, 'docente')">★</span>
+                    <span onclick="calificar(2, 'docente')">★</span>
+                    <span onclick="calificar(3, 'docente')">★</span>
+                    <span onclick="calificar(4, 'docente')">★</span>
+                    <span onclick="calificar(5, 'docente')">★</span>
+                </div>
+                <div class="error-message" id="errorRatingDocente">Debes calificar al docente</div>
+
+                <h3>Opinión sobre el docente (opcional)</h3>
+                <textarea id="opinionDocente" placeholder="Comentarios sobre la metodología, trato con estudiantes, claridad, etc..."></textarea>
+            </div>
+        </form>
+
+        <div class="botones-container">
+            <button class="boton boton-sec" onclick="anterior()" id="btnAnterior">
+                <span>⬅️</span> Asignatura anterior
+            </button>
+            <button class="boton" onclick="siguiente()" id="btnSiguiente">
+                <span id="btnSiguienteTexto">➡️</span> Siguiente asignatura
+            </button>
+        </div>
+    </div>
+</div>
+
+<script>
+// Variables globales
+let asignaturas = [];
+let respuestas = {};
+let indice = 0;
+let ratingAsignatura = 0;
+let ratingDocente = 0;
+let correoUsuario = "";
+let usandoOtroDocente = false;
+
+// Descriptores para las opciones
+const descripciones = {
+    teorica: "La asignatura se enfoca en el estudio de conceptos, teorías y marcos conceptuales. Se evalúa mediante ensayos, exámenes teóricos y análisis crítico.",
+    investigacion: "La asignatura promueve la investigación académica, con énfasis en metodologías de investigación, recolección de datos y producción de conocimiento nuevo.",
+    tecnica: "Enfocada en el desarrollo de habilidades prácticas, dominio de herramientas y técnicas específicas del campo artístico.",
+    practicas: "La evaluación se basa principalmente en ejercicios prácticos, ensayos técnicos y entregas físicas de trabajo.",
+    proyectos: "Se evalúa mediante proyectos integrales que pueden incluir investigación, desarrollo y presentación final.",
+    lecturas: "La calificación depende de análisis de lecturas, exposiciones orales y discusiones en clase.",
+    participacion: "Se valora la participación activa en clase, reflexiones personales y contribuciones al debate académico."
+};
+
+// DOM Elements
+const select = document.getElementById("selectAsignaturas");
+const lista = document.getElementById("listaAsignaturas");
+const contador = document.getElementById("contador");
+const bloqueGeneral = document.getElementById("bloqueGeneral");
+
+// Inicialización
+document.addEventListener('DOMContentLoaded', function() {
+    inicializarEstrellas();
+    document.getElementById('btnAnterior').style.display = 'none';
+});
+
+/* ========== VALIDACIÓN DE CORREO ========== */
+function validarCorreo(correo) {
+    const correoInput = document.getElementById("correoInstitucional");
+    const btnContinuar = document.getElementById("btnContinuarCorreo");
+    const errorMsg = document.getElementById("errorCorreo");
+    const iconValid = correoInput.parentNode.querySelector('.validation-icon.valid');
+    const iconInvalid = correoInput.parentNode.querySelector('.validation-icon.invalid');
+    
+    // Reset
+    errorMsg.style.display = 'none';
+    iconValid.style.display = 'none';
+    iconInvalid.style.display = 'none';
+    correoInput.style.borderColor = '';
+    
+    if (!correo) {
+        btnContinuar.disabled = true;
+        return false;
+    }
+    
+    const esValido = correo.toLowerCase().endsWith('@unal.edu.co');
+    
+    if (esValido) {
+        iconValid.style.display = 'block';
+        correoInput.style.borderColor = 'var(--success-color)';
+        btnContinuar.disabled = false;
+        return true;
+    } else {
+        iconInvalid.style.display = 'block';
+        correoInput.style.borderColor = 'var(--danger-color)';
+        btnContinuar.disabled = true;
+        
+        if (correo.includes('@') && !correo.endsWith('@unal.edu.co')) {
+            errorMsg.textContent = 'El correo debe terminar en @unal.edu.co';
+            errorMsg.style.display = 'block';
+        }
+        return false;
+    }
+}
+
+function verificarCorreo() {
+    const correo = document.getElementById("correoInstitucional").value.trim();
+    
+    if (validarCorreo(correo)) {
+        correoUsuario = correo;
+        document.getElementById("correoMostrado").textContent = correo;
+        document.getElementById("pasoEmail").classList.add("oculto");
+        document.getElementById("pasoSeleccion").classList.remove("oculto");
+        window.scrollTo({ top: 0, behavior: "smooth" });
+    }
+}
+
+/* ========== FUNCIONALIDAD DE SELECCIÓN ========== */
+select.addEventListener("change", () => {
+    const val = select.value;
+    if (!val || asignaturas.includes(val) || asignaturas.length >= 5) {
+        if (asignaturas.length >= 5) {
+            alert("¡Ya seleccionaste el máximo de 5 asignaturas! Elimina alguna para agregar otra.");
+        }
+        select.value = "";
+        return;
+    }
+    asignaturas.push(val);
+    renderSeleccion();
+    select.value = "";
+    
+    // Habilitar botón de continuar si hay al menos una asignatura
+    document.getElementById("btnContinuarAsignaturas").disabled = asignaturas.length === 0;
+});
+
+function renderSeleccion() {
+    lista.innerHTML = "";
+    asignaturas.forEach((a, i) => {
+        const tag = document.createElement("div");
+        tag.className = "tag";
+        tag.innerHTML = `${a} <span class="close">×</span>`;
+        tag.onclick = () => {
+            asignaturas.splice(i, 1);
+            delete respuestas[i];
+            renderSeleccion();
+            document.getElementById("btnContinuarAsignaturas").disabled = asignaturas.length === 0;
+        };
+        lista.appendChild(tag);
+    });
+    contador.textContent = `${asignaturas.length} / 5 seleccionadas`;
+}
+
+/* ========== MANEJO DE DOCENTE "OTRO" ========== */
+function manejarCambioDocente() {
+    const selectDocente = document.getElementById("docente");
+    const inputOtroDiv = document.getElementById("inputOtroDocente");
+    const errorDocente = document.getElementById("errorDocente");
+    
+    if (selectDocente.value === "otro") {
+        inputOtroDiv.classList.remove("oculto");
+        usandoOtroDocente = true;
+        errorDocente.style.display = 'none';
+    } else {
+        inputOtroDiv.classList.add("oculto");
+        usandoOtroDocente = false;
+        errorDocente.style.display = 'none';
+    }
+}
+
+/* ========== TOGGLE CHECKBOXES ========== */
+function toggleCheckbox(element) {
+    const checkbox = element.querySelector('input[type="checkbox"]');
+    checkbox.checked = !checkbox.checked;
+    element.classList.toggle('checked', checkbox.checked);
+    
+    const event = new Event('change');
+    checkbox.dispatchEvent(event);
+}
+
+function seleccionarRadio(element, name) {
+    const radios = document.querySelectorAll(`input[name="${name}"]`);
+    const radioItems = document.querySelectorAll(`.radio-item[onclick*="${name}"]`);
+    
+    radioItems.forEach(item => item.classList.remove('checked'));
+    element.classList.add('checked');
+    
+    const radio = element.querySelector('input[type="radio"]');
+    radio.checked = true;
+    
+    // Ocultar error
+    const errorId = `error${name.charAt(0).toUpperCase() + name.slice(1)}`;
+    document.getElementById(errorId).style.display = 'none';
+}
+
+/* ========== DESCRIPCIONES DE OPCIONES ========== */
+function mostrarDescripcion(tipo) {
+    const descripcionDiv = tipo in {teorica:1, investigacion:1, tecnica:1} 
+        ? document.getElementById('descripcionEnfoque')
+        : document.getElementById('descripcionCalificacion');
+    
+    if (descripciones[tipo]) {
+        descripcionDiv.innerHTML = `<strong>¿Qué significa?</strong><br>${descripciones[tipo]}`;
+        descripcionDiv.classList.remove('oculto');
+    }
+}
+
+// Cerrar descripción cuando se deselecciona
+document.querySelectorAll('input[type="checkbox"]').forEach(cb => {
+    cb.addEventListener('change', function() {
+        if (!this.checked) {
+            const descripcionDiv = this.name === 'enfoque' 
+                ? document.getElementById('descripcionEnfoque')
+                : document.getElementById('descripcionCalificacion');
+            
+            const otrosCheckboxes = document.querySelectorAll(`input[name="${this.name}"]:checked`);
+            if (otrosCheckboxes.length === 0) {
+                descripcionDiv.classList.add('oculto');
+            }
+        }
+    });
+});
+
+/* ========== SISTEMA DE ESTRELLAS ========== */
+function inicializarEstrellas() {
+    // Event listeners para hover
+    document.querySelectorAll('#estrellasAsignatura span').forEach((star, index) => {
+        star.addEventListener('mouseover', () => {
+            resetearEstrellas('asignatura');
+            highlightEstrellas(index + 1, 'asignatura');
+        });
+    });
+
+    document.querySelectorAll('#estrellasDocente span').forEach((star, index) => {
+        star.addEventListener('mouseover', () => {
+            resetearEstrellas('docente');
+            highlightEstrellas(index + 1, 'docente');
+        });
+    });
+
+    // Reset al salir del contenedor
+    document.getElementById('estrellasAsignatura').addEventListener('mouseleave', () => {
+        resetearEstrellas('asignatura');
+        highlightEstrellas(ratingAsignatura, 'asignatura');
+    });
+
+    document.getElementById('estrellasDocente').addEventListener('mouseleave', () => {
+        resetearEstrellas('docente');
+        highlightEstrellas(ratingDocente, 'docente');
+    });
+}
+
+function calificar(puntuacion, tipo) {
+    if (tipo === 'asignatura') {
+        ratingAsignatura = puntuacion;
+        document.getElementById('errorRatingAsignatura').style.display = 'none';
+    } else {
+        ratingDocente = puntuacion;
+        document.getElementById('errorRatingDocente').style.display = 'none';
+    }
+    highlightEstrellas(puntuacion, tipo);
+}
+
+function highlightEstrellas(puntuacion, tipo) {
+    const estrellas = tipo === 'asignatura' 
+        ? document.querySelectorAll('#estrellasAsignatura span')
+        : document.querySelectorAll('#estrellasDocente span');
+    
+    estrellas.forEach((star, index) => {
+        if (index < puntuacion) {
+            star.classList.add('activa');
+        } else {
+            star.classList.remove('activa');
+        }
+    });
+}
+
+function resetearEstrellas(tipo) {
+    const estrellas = tipo === 'asignatura' 
+        ? document.querySelectorAll('#estrellasAsignatura span')
+        : document.querySelectorAll('#estrellasDocente span');
+    
+    estrellas.forEach(star => {
+        star.classList.remove('activa');
+    });
+}
+
+/* ========== VALIDACIÓN ========== */
+function validarFormulario() {
+    let valido = true;
+    
+    // Reset errores
+    document.querySelectorAll('.error-message').forEach(e => e.style.display = 'none');
+    
+    // Validar solo si no es Taller
+    if (!bloqueGeneral.classList.contains('oculto')) {
+        // Validar enfoque
+        const enfoques = document.querySelectorAll("input[name='enfoque']:checked");
+        if (enfoques.length === 0) {
+            document.getElementById('errorEnfoque').style.display = 'block';
+            valido = false;
+        }
+        
+        // Validar calificación
+        const calificaciones = document.querySelectorAll("input[name='calificacion']:checked");
+        if (calificaciones.length === 0) {
+            document.getElementById('errorCalificacion').style.display = 'block';
+            valido = false;
+        }
+        
+        // Validar carga
+        const carga = document.querySelector("input[name='carga']:checked");
+        if (!carga) {
+            document.getElementById('errorCarga').style.display = 'block';
+            valido = false;
+        }
+        
+        // Validar gasto
+        const gasto = document.querySelector("input[name='gasto']:checked");
+        if (!gasto) {
+            document.getElementById('errorGasto').style.display = 'block';
+            valido = false;
+        }
+        
+        // Validar rating asignatura
+        if (ratingAsignatura === 0) {
+            document.getElementById('errorRatingAsignatura').style.display = 'block';
+            valido = false;
+        }
+    }
+    
+    // Validar docente (siempre)
+    const selectDocente = document.getElementById("docente");
+    let docenteValido = false;
+    
+    if (usandoOtroDocente) {
+        const otroDocente = document.getElementById("nombreOtroDocente").value.trim();
+        if (otroDocente) {
+            docenteValido = true;
+        } else {
+            document.getElementById("errorOtroDocente").style.display = 'block';
+            valido = false;
+        }
+    } else if (selectDocente.value && selectDocente.value !== "otro") {
+        docenteValido = true;
+    } else {
+        document.getElementById("errorDocente").style.display = 'block';
+        valido = false;
+    }
+    
+    // Validar rating docente (siempre obligatorio)
+    if (ratingDocente === 0) {
+        document.getElementById('errorRatingDocente').style.display = 'block';
+        valido = false;
+    }
+    
+    return valido;
+}
+
+/* ========== INICIAR FORMULARIO ========== */
+function iniciar() {
+    if (asignaturas.length === 0) {
+        alert("Por favor selecciona al menos una asignatura para continuar.");
+        return;
+    }
+    document.getElementById("pasoSeleccion").classList.add("oculto");
+    document.getElementById("pasoFormulario").classList.remove("oculto");
+    
+    // Mostrar/ocultar botón anterior
+    document.getElementById('btnAnterior').style.display = asignaturas.length > 1 ? 'flex' : 'none';
+    document.getElementById('btnSiguienteTexto').textContent = asignaturas.length > 1 ? 'Siguiente asignatura' : 'Finalizar';
+    
+    mostrar();
+}
+
+/* ========== MOSTRAR ASIGNATURA ACTUAL ========== */
+function mostrar() {
+    const actual = asignaturas[indice];
+    
+    document.getElementById("tituloAsignatura").textContent = actual;
+    document.getElementById("progreso").textContent = `Asignatura ${indice + 1} de ${asignaturas.length}`;
+    
+    // Actualizar texto del botón
+    const esUltima = indice === asignaturas.length - 1;
+    document.getElementById('btnSiguienteTexto').textContent = esUltima ? 'Finalizar' : 'Siguiente asignatura';
+    document.getElementById('btnAnterior').style.display = indice > 0 ? 'flex' : 'none';
+    
+    // Lógica Taller
+    if (actual.includes("Taller")) {
+        bloqueGeneral.classList.add("oculto");
+    } else {
+        bloqueGeneral.classList.remove("oculto");
+    }
+    
+    cargar();
+    window.scrollTo({ top: 0, behavior: "smooth" });
+}
+
+/* ========== GUARDAR Y CARGAR DATOS ========== */
+function guardar() {
+    let docenteNombre = "";
+    
+    if (usandoOtroDocente) {
+        docenteNombre = document.getElementById("nombreOtroDocente").value.trim();
+    } else {
+        docenteNombre = document.getElementById("docente").value;
+    }
+    
+    respuestas[indice] = {
+        asignatura: asignaturas[indice],
+        enfoque: [...document.querySelectorAll("input[name='enfoque']:checked")].map(e => e.value),
+        calificacion: [...document.querySelectorAll("input[name='calificacion']:checked")].map(e => e.value),
+        carga: document.querySelector("input[name='carga']:checked")?.value || "",
+        gasto: document.querySelector("input[name='gasto']:checked")?.value || "",
+        ratingAsignatura: ratingAsignatura,
+        opinionAsignatura: document.getElementById("opinionAsignatura").value,
+        docente: docenteNombre,
+        ratingDocente: ratingDocente,
+        opinionDocente: document.getElementById("opinionDocente").value
+    };
+}
+
+function cargar() {
+    limpiarFormulario();
+    if (!respuestas[indice]) {
+        ratingAsignatura = 0;
+        ratingDocente = 0;
+        usandoOtroDocente = false;
+        return;
+    }
+    
+    const data = respuestas[indice];
+    
+    // Restaurar checkboxes
+    data.enfoque.forEach(v => {
+        const el = document.querySelector(`input[name="enfoque"][value="${v}"]`);
+        if (el) {
+            el.checked = true;
+            el.closest('.checkbox-item').classList.add('checked');
+        }
+    });
+    
+    data.calificacion.forEach(v => {
+        const el = document.querySelector(`input[name="calificacion"][value="${v}"]`);
+        if (el) {
+            el.checked = true;
+            el.closest('.checkbox-item').classList.add('checked');
+        }
+    });
+    
+    // Restaurar radios
+    if (data.carga) {
+        const el = document.querySelector(`input[name="carga"][value="${data.carga}"]`);
+        if (el) {
+            el.checked = true;
+            el.closest('.radio-item').classList.add('checked');
+        }
+    }
+    
+    if (data.gasto) {
+        const el = document.querySelector(`input[name="gasto"][value="${data.gasto}"]`);
+        if (el) {
+            el.checked = true;
+            el.closest('.radio-item').classList.add('checked');
+        }
+    }
+    
+    // Restaurar estrellas
+    ratingAsignatura = data.ratingAsignatura || 0;
+    ratingDocente = data.ratingDocente || 0;
+    highlightEstrellas(ratingAsignatura, 'asignatura');
+    highlightEstrellas(ratingDocente, 'docente');
+    
+    // Restaurar docente
+    if (data.docente) {
+        // Verificar si el docente está en la lista
+        const selectDocente = document.getElementById("docente");
+        let encontrado = false;
+        
+        for (let i = 0; i < selectDocente.options.length; i++) {
+            if (selectDocente.options[i].value === data.docente) {
+                selectDocente.value = data.docente;
+                encontrado = true;
+                usandoOtroDocente = false;
+                break;
+            }
+        }
+        
+        if (!encontrado) {
+            selectDocente.value = "otro";
+            usandoOtroDocente = true;
+            document.getElementById("inputOtroDocente").classList.remove("oculto");
+            document.getElementById("nombreOtroDocente").value = data.docente;
+        }
+    }
+    
+    // Restaurar textos
+    document.getElementById("opinionAsignatura").value = data.opinionAsignatura || "";
+    document.getElementById("opinionDocente").value = data.opinionDocente || "";
+}
+
+function limpiarFormulario() {
+    // Limpiar checkboxes
+    document.querySelectorAll('.checkbox-item').forEach(item => {
+        item.classList.remove('checked');
+    });
+    document.querySelectorAll('input[type="checkbox"]').forEach(i => i.checked = false);
+    
+    // Limpiar radios
+    document.querySelectorAll('.radio-item').forEach(item => {
+        item.classList.remove('checked');
+    });
+    document.querySelectorAll('input[type="radio"]').forEach(i => i.checked = false);
+    
+    // Limpiar estrellas
+    ratingAsignatura = 0;
+    ratingDocente = 0;
+    resetearEstrellas('asignatura');
+    resetearEstrellas('docente');
+    
+    // Limpiar textos
+    document.querySelectorAll("textarea").forEach(t => t.value = "");
+    
+    // Resetear docente
+    document.getElementById("docente").value = "";
+    document.getElementById("inputOtroDocente").classList.add("oculto");
+    document.getElementById("nombreOtroDocente").value = "";
+    usandoOtroDocente = false;
+    
+    // Limpiar descripciones
+    document.getElementById("descripcionEnfoque").classList.add('oculto');
+    document.getElementById("descripcionCalificacion").classList.add('oculto');
+    
+    // Reset errores
+    document.querySelectorAll('.error-message').forEach(e => e.style.display = 'none');
+}
+
+/* ========== NAVEGACIÓN ========== */
+function siguiente() {
+    if (!validarFormulario()) {
+        alert("Por favor completa todos los campos obligatorios antes de continuar.");
+        return;
+    }
+    
+    guardar();
+    
+    if (indice < asignaturas.length - 1) {
+        indice++;
+        mostrar();
+    } else {
+        if (confirm("¿Estás seguro de que deseas enviar todas tus respuestas?")) {
+            enviarRespuestas();
+        }
+    }
+}
+
+function anterior() {
+    guardar();
+    if (indice > 0) {
+        indice--;
+        mostrar();
+    }
+}
+
+/* ========== GENERAR RESUMEN ========== */
+function generarResumen() {
+    let resumenHTML = "";
+    
+    Object.values(respuestas).forEach((resp, i) => {
+        resumenHTML += `
+            <div class="respuesta-item">
+                <h4>${i+1}. ${resp.asignatura}</h4>
+                <div class="respuesta-detalle">
+                    <p><strong>Enfoque:</strong> ${resp.enfoque.join(', ')}</p>
+                    <p><strong>Calificación:</strong> ${resp.calificacion.join(', ')}</p>
+                    <p><strong>Carga:</strong> ${resp.carga}</p>
+                    <p><strong>Gasto:</strong> ${resp.gasto}</p>
+                    <p><strong>Valoración materia:</strong> ${resp.ratingAsignatura}/5 ⭐</p>
+                    <p><strong>Docente:</strong> ${resp.docente}</p>
+                    <p><strong>Valoración docente:</strong> ${resp.ratingDocente}/5 ⭐</p>
+                </div>
+            </div>
+        `;
+    });
+    
+    return resumenHTML;
+}
+
+/* ========== ENVIAR RESPUESTAS ========== */
+function enviarRespuestas() {
+    // Agregar correo a las respuestas
+    const respuestasCompletas = {
+        correo: correoUsuario,
+        fecha: new Date().toISOString(),
+        respuestas: respuestas
+    };
+    
+    console.log("RESPUESTAS COMPLETAS:", respuestasCompletas);
+    
+    // Mostrar resumen
+    document.getElementById('resumenRespuestas').innerHTML = generarResumen();
+    
+    // Simular envío a servidor
+    setTimeout(() => {
+        document.getElementById("pasoFormulario").classList.add("oculto");
+        document.getElementById("pantallaFinal").classList.remove("oculto");
+        window.scrollTo({ top: 0, behavior: "smooth" });
+        
+        // Aquí puedes agregar código para enviar a tu backend:
+        /*
+        fetch('/api/guardar-opiniones', {
+            method: 'POST',
+            headers: {'Content-Type': 'application/json'},
+            body: JSON.stringify(respuestasCompletas)
+        })
+        .then(response => response.json())
+        .then(data => {
+            console.log('Respuestas guardadas:', data);
+        })
+        .catch(error => {
+            console.error('Error:', error);
+            alert('Hubo un error al guardar las respuestas. Por favor intenta nuevamente.');
+        });
+        */
+    }, 500);
+}
+
+function reiniciar() {
+    // Reiniciar todas las variables
+    asignaturas = [];
+    respuestas = {};
+    indice = 0;
+    ratingAsignatura = 0;
+    ratingDocente = 0;
+    usandoOtroDocente = false;
+    
+    // Limpiar interfaz
+    lista.innerHTML = "";
+    contador.textContent = "0 / 5 seleccionadas";
+    document.getElementById("btnContinuarAsignaturas").disabled = true;
+    document.getElementById('correoInstitucional').value = '';
+    document.getElementById('correoInstitucional').style.borderColor = '';
+    document.querySelectorAll('.validation-icon').forEach(icon => icon.style.display = 'none');
+    document.getElementById('errorCorreo').style.display = 'none';
+    document.getElementById('btnContinuarCorreo').disabled = true;
+    
+    // Mostrar paso inicial
+    document.getElementById("pantallaFinal").classList.add("oculto");
+    document.getElementById("pasoFormulario").classList.add("oculto");
+    document.getElementById("pasoSeleccion").classList.add("oculto");
+    document.getElementById("pasoEmail").classList.remove("oculto");
+    
+    // Limpiar formulario
+    limpiarFormulario();
+}
+</script>
+
+</body>
+</html>
