@@ -6,7 +6,6 @@
 <title>Opiniones de Asignaturas – Artes UNAL</title>
 
 <!-- Google Fonts -->
-
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700&display=swap" rel="stylesheet">
@@ -90,7 +89,7 @@
                 <div id="resumenRespuestas"></div>
             </div>
             
-            <button class="boton" onclick="location.reload()">
+            <button class="boton" onclick="reiniciar()">
                 <span>📝</span> Llenar otro formulario
             </button>
         </div>
@@ -114,8 +113,16 @@
         <p>Elige las materias sobre las que quieres dar tu opinión:</p>
 
         <div class="card">
-            <label for="selectAsignaturas"><strong>Buscar asignatura:</strong></label>
-            <select id="selectAsignaturas">
+            <!-- BUSCADOR DE ASIGNATURAS -->
+            <div class="input-group" style="margin-bottom: 15px;">
+                <label for="buscarAsignatura"><strong>Buscar asignatura:</strong></label>
+                <input type="text" id="buscarAsignatura" 
+                       placeholder="Escribe para filtrar asignaturas..."
+                       oninput="filtrarAsignaturas()">
+            </div>
+            
+            <label for="selectAsignaturas"><strong>Lista de asignaturas:</strong></label>
+            <select id="selectAsignaturas" onchange="agregarAsignatura()">
                 <option value="">— Selecciona una asignatura —</option>
 
                 <!-- LISTA COMPLETA -->
@@ -194,40 +201,40 @@
                 <div class="card">
                     <h3>Enfoque de la asignatura <span class="required">*</span></h3>
                     <div class="checkbox-group">
-                        <div class="checkbox-item" onclick="toggleCheckbox(this)">
+                        <label class="checkbox-item">
                             <input type="checkbox" name="enfoque" value="Teórica" onchange="mostrarDescripcion('teorica')">
                             <span>Teórica</span>
-                        </div>
-                        <div class="checkbox-item" onclick="toggleCheckbox(this)">
+                        </label>
+                        <label class="checkbox-item">
                             <input type="checkbox" name="enfoque" value="Investigación" onchange="mostrarDescripcion('investigacion')">
                             <span>Investigación</span>
-                        </div>
-                        <div class="checkbox-item" onclick="toggleCheckbox(this)">
+                        </label>
+                        <label class="checkbox-item">
                             <input type="checkbox" name="enfoque" value="Técnica" onchange="mostrarDescripcion('tecnica')">
                             <span>Técnica</span>
-                        </div>
+                        </label>
                     </div>
                     <div id="descripcionEnfoque" class="descripcion-opcion oculto"></div>
                     <div class="error-message" id="errorEnfoque">Debes seleccionar al menos un enfoque</div>
 
                     <h3>Modo de calificación <span class="required">*</span></h3>
                     <div class="checkbox-group">
-                        <div class="checkbox-item" onclick="toggleCheckbox(this)">
+                        <label class="checkbox-item">
                             <input type="checkbox" name="calificacion" value="Prácticas y entregas físicas" onchange="mostrarDescripcion('practicas')">
                             <span>Prácticas y entregas físicas</span>
-                        </div>
-                        <div class="checkbox-item" onclick="toggleCheckbox(this)">
+                        </label>
+                        <label class="checkbox-item">
                             <input type="checkbox" name="calificacion" value="Entregas de proyectos" onchange="mostrarDescripcion('proyectos')">
                             <span>Entregas de proyectos</span>
-                        </div>
-                        <div class="checkbox-item" onclick="toggleCheckbox(this)">
+                        </label>
+                        <label class="checkbox-item">
                             <input type="checkbox" name="calificacion" value="Lecturas o exposiciones" onchange="mostrarDescripcion('lecturas')">
                             <span>Lecturas o exposiciones</span>
-                        </div>
-                        <div class="checkbox-item" onclick="toggleCheckbox(this)">
+                        </label>
+                        <label class="checkbox-item">
                             <input type="checkbox" name="calificacion" value="Reflexión y participación en clase" onchange="mostrarDescripcion('participacion')">
                             <span>Reflexión y participación en clase</span>
-                        </div>
+                        </label>
                     </div>
                     <div id="descripcionCalificacion" class="descripcion-opcion oculto"></div>
                     <div class="error-message" id="errorCalificacion">Debes seleccionar al menos un modo de calificación</div>
@@ -236,43 +243,43 @@
                 <div class="card">
                     <h3>Nivel de carga académica <span class="required">*</span></h3>
                     <div class="radio-group">
-                        <div class="radio-item" onclick="seleccionarRadio(this, 'carga')">
+                        <label class="radio-item">
                             <input type="radio" name="carga" value="Baja">
                             <span>Baja</span>
-                        </div>
-                        <div class="radio-item" onclick="seleccionarRadio(this, 'carga')">
+                        </label>
+                        <label class="radio-item">
                             <input type="radio" name="carga" value="Media">
                             <span>Media</span>
-                        </div>
-                        <div class="radio-item" onclick="seleccionarRadio(this, 'carga')">
+                        </label>
+                        <label class="radio-item">
                             <input type="radio" name="carga" value="Alta">
                             <span>Alta</span>
-                        </div>
+                        </label>
                     </div>
                     <div class="error-message" id="errorCarga">Debes seleccionar el nivel de carga</div>
 
                     <h3>Gasto económico <span class="required">*</span></h3>
                     <div class="radio-group">
-                        <div class="radio-item" onclick="seleccionarRadio(this, 'gasto')">
+                        <label class="radio-item">
                             <input type="radio" name="gasto" value="Casi ninguno">
                             <span>Casi ninguno</span>
-                        </div>
-                        <div class="radio-item" onclick="seleccionarRadio(this, 'gasto')">
+                        </label>
+                        <label class="radio-item">
                             <input type="radio" name="gasto" value="Bajo">
                             <span>Bajo</span>
-                        </div>
-                        <div class="radio-item" onclick="seleccionarRadio(this, 'gasto')">
+                        </label>
+                        <label class="radio-item">
                             <input type="radio" name="gasto" value="Medio">
                             <span>Medio</span>
-                        </div>
-                        <div class="radio-item" onclick="seleccionarRadio(this, 'gasto')">
+                        </label>
+                        <label class="radio-item">
                             <input type="radio" name="gasto" value="Alto">
                             <span>Alto</span>
-                        </div>
-                        <div class="radio-item" onclick="seleccionarRadio(this, 'gasto')">
+                        </label>
+                        <label class="radio-item">
                             <input type="radio" name="gasto" value="Muy alto">
                             <span>Muy alto</span>
-                        </div>
+                        </label>
                     </div>
                     <div class="error-message" id="errorGasto">Debes seleccionar el nivel de gasto</div>
                 </div>
@@ -281,11 +288,11 @@
                     <h3>Valoración de la asignatura <span class="required">*</span></h3>
                     <p class="rating-label">Califica del 1 al 5 estrellas</p>
                     <div class="estrellas" id="estrellasAsignatura">
-                        <span onclick="calificar(1, 'asignatura')">★</span>
-                        <span onclick="calificar(2, 'asignatura')">★</span>
-                        <span onclick="calificar(3, 'asignatura')">★</span>
-                        <span onclick="calificar(4, 'asignatura')">★</span>
-                        <span onclick="calificar(5, 'asignatura')">★</span>
+                        <label><input type="radio" name="ratingAsignatura" value="1" style="display: none;"><span onclick="calificar(1, 'asignatura')">★</span></label>
+                        <label><input type="radio" name="ratingAsignatura" value="2" style="display: none;"><span onclick="calificar(2, 'asignatura')">★</span></label>
+                        <label><input type="radio" name="ratingAsignatura" value="3" style="display: none;"><span onclick="calificar(3, 'asignatura')">★</span></label>
+                        <label><input type="radio" name="ratingAsignatura" value="4" style="display: none;"><span onclick="calificar(4, 'asignatura')">★</span></label>
+                        <label><input type="radio" name="ratingAsignatura" value="5" style="display: none;"><span onclick="calificar(5, 'asignatura')">★</span></label>
                     </div>
                     <div class="error-message" id="errorRatingAsignatura">Debes calificar la asignatura</div>
 
@@ -339,16 +346,16 @@
                 <h3 style="margin-top: 20px;">Valoración del docente <span class="required">*</span></h3>
                 <p class="rating-label">Califica del 1 al 5 estrellas</p>
                 <div class="estrellas" id="estrellasDocente">
-                    <span onclick="calificar(1, 'docente')">★</span>
-                    <span onclick="calificar(2, 'docente')">★</span>
-                    <span onclick="calificar(3, 'docente')">★</span>
-                    <span onclick="calificar(4, 'docente')">★</span>
-                    <span onclick="calificar(5, 'docente')">★</span>
+                    <label><input type="radio" name="ratingDocente" value="1" style="display: none;"><span onclick="calificar(1, 'docente')">★</span></label>
+                    <label><input type="radio" name="ratingDocente" value="2" style="display: none;"><span onclick="calificar(2, 'docente')">★</span></label>
+                    <label><input type="radio" name="ratingDocente" value="3" style="display: none;"><span onclick="calificar(3, 'docente')">★</span></label>
+                    <label><input type="radio" name="ratingDocente" value="4" style="display: none;"><span onclick="calificar(4, 'docente')">★</span></label>
+                    <label><input type="radio" name="ratingDocente" value="5" style="display: none;"><span onclick="calificar(5, 'docente')">★</span></label>
                 </div>
                 <div class="error-message" id="errorRatingDocente">Debes calificar al docente</div>
 
                 <h3>Opinión sobre el docente (opcional)</h3>
-                <textarea id="opinionDocente" placeholder="Comentarios sobre la metodología, trato con estudiantes, claridad, etc..."></textarea>
+                    <textarea id="opinionDocente" placeholder="Comentarios sobre la metodología, trato con estudiantes, claridad, etc..."></textarea>
             </div>
         </form>
 
@@ -390,11 +397,159 @@ const lista = document.getElementById("listaAsignaturas");
 const contador = document.getElementById("contador");
 const bloqueGeneral = document.getElementById("bloqueGeneral");
 
-// Inicialización
+// Inicialización con recuperación de datos
 document.addEventListener('DOMContentLoaded', function() {
     inicializarEstrellas();
     document.getElementById('btnAnterior').style.display = 'none';
+    
+    // Intentar recuperar datos guardados
+    recuperarDatosGuardados();
+    
+    // Guardar automáticamente cada 10 segundos
+    setInterval(guardarEnLocalStorage, 10000);
+    
+    // Guardar también cuando el usuario cierre la página
+    window.addEventListener('beforeunload', function() {
+        guardarEnLocalStorage();
+    });
+    
+    // Configurar eventos para checkboxes y radios (para que funcionen en todo el label)
+    configurarEventosInputs();
 });
+
+/* ========== CONFIGURAR EVENTOS PARA INPUTS ========== */
+function configurarEventosInputs() {
+    // Checkboxes - hacer que todo el label sea clickeable
+    document.querySelectorAll('.checkbox-item').forEach(item => {
+        const checkbox = item.querySelector('input[type="checkbox"]');
+        item.addEventListener('click', function(e) {
+            if (e.target !== checkbox) {
+                checkbox.checked = !checkbox.checked;
+                const event = new Event('change');
+                checkbox.dispatchEvent(event);
+                actualizarEstiloCheckbox(item, checkbox.checked);
+            }
+        });
+        
+        // Inicializar estilo
+        actualizarEstiloCheckbox(item, checkbox.checked);
+    });
+    
+    // Radios - hacer que todo el label sea clickeable
+    document.querySelectorAll('.radio-item').forEach(item => {
+        const radio = item.querySelector('input[type="radio"]');
+        item.addEventListener('click', function(e) {
+            if (e.target !== radio) {
+                radio.checked = true;
+                const event = new Event('change');
+                radio.dispatchEvent(event);
+                actualizarEstiloRadio(item);
+            }
+        });
+        
+        // Inicializar estilo
+        actualizarEstiloRadio(item);
+    });
+}
+
+function actualizarEstiloCheckbox(item, checked) {
+    if (checked) {
+        item.classList.add('checked');
+    } else {
+        item.classList.remove('checked');
+    }
+}
+
+function actualizarEstiloRadio(item) {
+    const radio = item.querySelector('input[type="radio"]');
+    const radioGroup = radio.name;
+    
+    // Primero quitar 'checked' de todos los radios del mismo grupo
+    document.querySelectorAll(`.radio-item input[name="${radioGroup}"]`).forEach(r => {
+        r.closest('.radio-item').classList.remove('checked');
+    });
+    
+    // Luego agregar 'checked' solo al seleccionado
+    if (radio.checked) {
+        item.classList.add('checked');
+    }
+}
+
+/* ========== FILTRAR ASIGNATURAS ========== */
+function filtrarAsignaturas() {
+    const busqueda = document.getElementById('buscarAsignatura').value.toLowerCase();
+    const opciones = document.querySelectorAll('#selectAsignaturas option');
+    let encontradas = false;
+    
+    opciones.forEach(opcion => {
+        if (opcion.value === "") {
+            opcion.style.display = 'block';
+            return;
+        }
+        
+        const texto = opcion.textContent.toLowerCase();
+        if (texto.includes(busqueda)) {
+            opcion.style.display = 'block';
+            encontradas = true;
+        } else {
+            opcion.style.display = 'none';
+        }
+    });
+    
+    // Si hay búsqueda y no se encontró nada, mostrar mensaje
+    if (busqueda && !encontradas) {
+        if (!document.getElementById('noResultados')) {
+            const noResultados = document.createElement('option');
+            noResultados.id = 'noResultados';
+            noResultados.value = '';
+            noResultados.textContent = 'No se encontraron asignaturas con ese nombre';
+            noResultados.disabled = true;
+            select.appendChild(noResultados);
+        }
+    } else {
+        const noResultados = document.getElementById('noResultados');
+        if (noResultados) {
+            noResultados.remove();
+        }
+    }
+}
+
+/* ========== AGREGAR ASIGNATURA ========== */
+function agregarAsignatura() {
+    const val = select.value;
+    if (!val || val === "" || val.includes("No se encontraron")) {
+        return;
+    }
+    
+    if (asignaturas.includes(val)) {
+        alert("Esta asignatura ya fue seleccionada.");
+        select.value = "";
+        return;
+    }
+    
+    if (asignaturas.length >= 5) {
+        alert("¡Ya seleccionaste el máximo de 5 asignaturas! Elimina alguna para agregar otra.");
+        select.value = "";
+        return;
+    }
+    
+    asignaturas.push(val);
+    renderSeleccion();
+    select.value = "";
+    
+    // Limpiar búsqueda
+    document.getElementById('buscarAsignatura').value = '';
+    // Restaurar todas las opciones
+    document.querySelectorAll('#selectAsignaturas option').forEach(opcion => {
+        opcion.style.display = 'block';
+    });
+    
+    // Habilitar botón de continuar si hay al menos una asignatura
+    document.getElementById("btnContinuarAsignaturas").disabled = asignaturas.length === 0;
+    
+    // Guardar en localStorage
+    guardarEnLocalStorage();
+}
 
 /* ========== VALIDACIÓN DE CORREO ========== */
 function validarCorreo(correo) {
@@ -444,38 +599,28 @@ function verificarCorreo() {
         document.getElementById("pasoEmail").classList.add("oculto");
         document.getElementById("pasoSeleccion").classList.remove("oculto");
         window.scrollTo({ top: 0, behavior: "smooth" });
+        
+        // Guardar correo en localStorage
+        guardarEnLocalStorage();
     }
 }
 
 /* ========== FUNCIONALIDAD DE SELECCIÓN ========== */
-select.addEventListener("change", () => {
-    const val = select.value;
-    if (!val || asignaturas.includes(val) || asignaturas.length >= 5) {
-        if (asignaturas.length >= 5) {
-            alert("¡Ya seleccionaste el máximo de 5 asignaturas! Elimina alguna para agregar otra.");
-        }
-        select.value = "";
-        return;
-    }
-    asignaturas.push(val);
-    renderSeleccion();
-    select.value = "";
-    
-    // Habilitar botón de continuar si hay al menos una asignatura
-    document.getElementById("btnContinuarAsignaturas").disabled = asignaturas.length === 0;
-});
-
 function renderSeleccion() {
     lista.innerHTML = "";
     asignaturas.forEach((a, i) => {
         const tag = document.createElement("div");
         tag.className = "tag";
         tag.innerHTML = `${a} <span class="close">×</span>`;
-        tag.onclick = () => {
+        
+        // Hacer que toda la etiqueta sea clickeable para eliminar
+        tag.onclick = (e) => {
+            // Si click en la X o en cualquier parte
             asignaturas.splice(i, 1);
             delete respuestas[i];
             renderSeleccion();
             document.getElementById("btnContinuarAsignaturas").disabled = asignaturas.length === 0;
+            guardarEnLocalStorage();
         };
         lista.appendChild(tag);
     });
@@ -497,31 +642,8 @@ function manejarCambioDocente() {
         usandoOtroDocente = false;
         errorDocente.style.display = 'none';
     }
-}
-
-/* ========== TOGGLE CHECKBOXES ========== */
-function toggleCheckbox(element) {
-    const checkbox = element.querySelector('input[type="checkbox"]');
-    checkbox.checked = !checkbox.checked;
-    element.classList.toggle('checked', checkbox.checked);
     
-    const event = new Event('change');
-    checkbox.dispatchEvent(event);
-}
-
-function seleccionarRadio(element, name) {
-    const radios = document.querySelectorAll(`input[name="${name}"]`);
-    const radioItems = document.querySelectorAll(`.radio-item[onclick*="${name}"]`);
-    
-    radioItems.forEach(item => item.classList.remove('checked'));
-    element.classList.add('checked');
-    
-    const radio = element.querySelector('input[type="radio"]');
-    radio.checked = true;
-    
-    // Ocultar error
-    const errorId = `error${name.charAt(0).toUpperCase() + name.slice(1)}`;
-    document.getElementById(errorId).style.display = 'none';
+    guardarEnLocalStorage();
 }
 
 /* ========== DESCRIPCIONES DE OPCIONES ========== */
@@ -539,6 +661,8 @@ function mostrarDescripcion(tipo) {
 // Cerrar descripción cuando se deselecciona
 document.querySelectorAll('input[type="checkbox"]').forEach(cb => {
     cb.addEventListener('change', function() {
+        actualizarEstiloCheckbox(this.closest('.checkbox-item'), this.checked);
+        
         if (!this.checked) {
             const descripcionDiv = this.name === 'enfoque' 
                 ? document.getElementById('descripcionEnfoque')
@@ -549,6 +673,15 @@ document.querySelectorAll('input[type="checkbox"]').forEach(cb => {
                 descripcionDiv.classList.add('oculto');
             }
         }
+        guardarEnLocalStorage();
+    });
+});
+
+// Eventos para radios
+document.querySelectorAll('input[type="radio"]').forEach(radio => {
+    radio.addEventListener('change', function() {
+        actualizarEstiloRadio(this.closest('.radio-item'));
+        guardarEnLocalStorage();
     });
 });
 
@@ -585,11 +718,20 @@ function calificar(puntuacion, tipo) {
     if (tipo === 'asignatura') {
         ratingAsignatura = puntuacion;
         document.getElementById('errorRatingAsignatura').style.display = 'none';
+        
+        // Actualizar radio button correspondiente
+        const radio = document.querySelector(`input[name="ratingAsignatura"][value="${puntuacion}"]`);
+        if (radio) radio.checked = true;
     } else {
         ratingDocente = puntuacion;
         document.getElementById('errorRatingDocente').style.display = 'none';
+        
+        // Actualizar radio button correspondiente
+        const radio = document.querySelector(`input[name="ratingDocente"][value="${puntuacion}"]`);
+        if (radio) radio.checked = true;
     }
     highlightEstrellas(puntuacion, tipo);
+    guardarEnLocalStorage();
 }
 
 function highlightEstrellas(puntuacion, tipo) {
@@ -702,6 +844,7 @@ function iniciar() {
     document.getElementById('btnSiguienteTexto').textContent = asignaturas.length > 1 ? 'Siguiente asignatura' : 'Finalizar';
     
     mostrar();
+    guardarEnLocalStorage();
 }
 
 /* ========== MOSTRAR ASIGNATURA ACTUAL ========== */
@@ -749,6 +892,8 @@ function guardar() {
         ratingDocente: ratingDocente,
         opinionDocente: document.getElementById("opinionDocente").value
     };
+    
+    guardarEnLocalStorage();
 }
 
 function cargar() {
@@ -763,19 +908,19 @@ function cargar() {
     const data = respuestas[indice];
     
     // Restaurar checkboxes
-    data.enfoque.forEach(v => {
+    data.enfoque?.forEach(v => {
         const el = document.querySelector(`input[name="enfoque"][value="${v}"]`);
         if (el) {
             el.checked = true;
-            el.closest('.checkbox-item').classList.add('checked');
+            actualizarEstiloCheckbox(el.closest('.checkbox-item'), true);
         }
     });
     
-    data.calificacion.forEach(v => {
+    data.calificacion?.forEach(v => {
         const el = document.querySelector(`input[name="calificacion"][value="${v}"]`);
         if (el) {
             el.checked = true;
-            el.closest('.checkbox-item').classList.add('checked');
+            actualizarEstiloCheckbox(el.closest('.checkbox-item'), true);
         }
     });
     
@@ -784,7 +929,7 @@ function cargar() {
         const el = document.querySelector(`input[name="carga"][value="${data.carga}"]`);
         if (el) {
             el.checked = true;
-            el.closest('.radio-item').classList.add('checked');
+            actualizarEstiloRadio(el.closest('.radio-item'));
         }
     }
     
@@ -792,7 +937,7 @@ function cargar() {
         const el = document.querySelector(`input[name="gasto"][value="${data.gasto}"]`);
         if (el) {
             el.checked = true;
-            el.closest('.radio-item').classList.add('checked');
+            actualizarEstiloRadio(el.closest('.radio-item'));
         }
     }
     
@@ -801,6 +946,17 @@ function cargar() {
     ratingDocente = data.ratingDocente || 0;
     highlightEstrellas(ratingAsignatura, 'asignatura');
     highlightEstrellas(ratingDocente, 'docente');
+    
+    // Restaurar radio buttons de estrellas
+    if (ratingAsignatura > 0) {
+        const radio = document.querySelector(`input[name="ratingAsignatura"][value="${ratingAsignatura}"]`);
+        if (radio) radio.checked = true;
+    }
+    
+    if (ratingDocente > 0) {
+        const radio = document.querySelector(`input[name="ratingDocente"][value="${ratingDocente}"]`);
+        if (radio) radio.checked = true;
+    }
     
     // Restaurar docente
     if (data.docente) {
@@ -817,7 +973,7 @@ function cargar() {
             }
         }
         
-        if (!encontrado) {
+        if (!encontrado && data.docente) {
             selectDocente.value = "otro";
             usandoOtroDocente = true;
             document.getElementById("inputOtroDocente").classList.remove("oculto");
@@ -828,6 +984,14 @@ function cargar() {
     // Restaurar textos
     document.getElementById("opinionAsignatura").value = data.opinionAsignatura || "";
     document.getElementById("opinionDocente").value = data.opinionDocente || "";
+    
+    // Restaurar descripciones si hay checkboxes seleccionados
+    if (data.enfoque && data.enfoque.length > 0) {
+        const primerEnfoque = data.enfoque[0].toLowerCase();
+        if (primerEnfoque.includes('teórica')) mostrarDescripcion('teorica');
+        else if (primerEnfoque.includes('investigación')) mostrarDescripcion('investigacion');
+        else if (primerEnfoque.includes('técnica')) mostrarDescripcion('tecnica');
+    }
 }
 
 function limpiarFormulario() {
@@ -866,6 +1030,79 @@ function limpiarFormulario() {
     document.querySelectorAll('.error-message').forEach(e => e.style.display = 'none');
 }
 
+/* ========== GUARDADO EN LOCALSTORAGE ========== */
+function guardarEnLocalStorage() {
+    try {
+        const datosGuardar = {
+            correoUsuario: correoUsuario,
+            asignaturas: asignaturas,
+            respuestas: respuestas,
+            indice: indice,
+            ratingAsignatura: ratingAsignatura,
+            ratingDocente: ratingDocente,
+            usandoOtroDocente: usandoOtroDocente,
+            timestamp: new Date().getTime()
+        };
+        
+        localStorage.setItem('opinionesArtesUNAL', JSON.stringify(datosGuardar));
+        console.log('Datos guardados en localStorage');
+    } catch (error) {
+        console.error('Error guardando en localStorage:', error);
+    }
+}
+
+function recuperarDatosGuardados() {
+    try {
+        const datosGuardados = localStorage.getItem('opinionesArtesUNAL');
+        if (!datosGuardados) return;
+        
+        const datos = JSON.parse(datosGuardados);
+        
+        // Verificar si los datos son muy viejos (más de 24 horas)
+        const ahora = new Date().getTime();
+        if (ahora - datos.timestamp > 24 * 60 * 60 * 1000) {
+            localStorage.removeItem('opinionesArtesUNAL');
+            return;
+        }
+        
+        // Preguntar al usuario si quiere recuperar
+        if (confirm('Encontramos un formulario en progreso. ¿Deseas continuar donde lo dejaste?')) {
+            // Restaurar datos
+            correoUsuario = datos.correoUsuario || '';
+            asignaturas = datos.asignaturas || [];
+            respuestas = datos.respuestas || {};
+            indice = datos.indice || 0;
+            ratingAsignatura = datos.ratingAsignatura || 0;
+            ratingDocente = datos.ratingDocente || 0;
+            usandoOtroDocente = datos.usandoOtroDocente || false;
+            
+            // Si ya tenemos correo, ir directamente a selección
+            if (correoUsuario) {
+                document.getElementById("correoMostrado").textContent = correoUsuario;
+                document.getElementById("correoInstitucional").value = correoUsuario;
+                document.getElementById("pasoEmail").classList.add("oculto");
+                
+                // Si ya tenemos asignaturas, ir al formulario
+                if (asignaturas.length > 0) {
+                    document.getElementById("pasoSeleccion").classList.add("oculto");
+                    document.getElementById("pasoFormulario").classList.remove("oculto");
+                    mostrar();
+                } else {
+                    document.getElementById("pasoSeleccion").classList.remove("oculto");
+                    renderSeleccion();
+                    document.getElementById("btnContinuarAsignaturas").disabled = asignaturas.length === 0;
+                }
+            }
+        } else {
+            // Si el usuario no quiere recuperar, limpiar localStorage
+            localStorage.removeItem('opinionesArtesUNAL');
+        }
+    } catch (error) {
+        console.error('Error recuperando datos:', error);
+        localStorage.removeItem('opinionesArtesUNAL');
+    }
+}
+
 /* ========== NAVEGACIÓN ========== */
 function siguiente() {
     if (!validarFormulario()) {
@@ -902,13 +1139,13 @@ function generarResumen() {
             <div class="respuesta-item">
                 <h4>${i+1}. ${resp.asignatura}</h4>
                 <div class="respuesta-detalle">
-                    <p><strong>Enfoque:</strong> ${resp.enfoque.join(', ')}</p>
-                    <p><strong>Calificación:</strong> ${resp.calificacion.join(', ')}</p>
-                    <p><strong>Carga:</strong> ${resp.carga}</p>
-                    <p><strong>Gasto:</strong> ${resp.gasto}</p>
-                    <p><strong>Valoración materia:</strong> ${resp.ratingAsignatura}/5 ⭐</p>
-                    <p><strong>Docente:</strong> ${resp.docente}</p>
-                    <p><strong>Valoración docente:</strong> ${resp.ratingDocente}/5 ⭐</p>
+                    <p><strong>Enfoque:</strong> ${resp.enfoque?.join(', ') || 'No aplica'}</p>
+                    <p><strong>Calificación:</strong> ${resp.calificacion?.join(', ') || 'No aplica'}</p>
+                    <p><strong>Carga:</strong> ${resp.carga || 'No especificado'}</p>
+                    <p><strong>Gasto:</strong> ${resp.gasto || 'No especificado'}</p>
+                    <p><strong>Valoración materia:</strong> ${resp.ratingAsignatura || 0}/5 ⭐</p>
+                    <p><strong>Docente:</strong> ${resp.docente || 'No especificado'}</p>
+                    <p><strong>Valoración docente:</strong> ${resp.ratingDocente || 0}/5 ⭐</p>
                 </div>
             </div>
         `;
@@ -917,7 +1154,6 @@ function generarResumen() {
     return resumenHTML;
 }
 
-/* ========== ENVIAR RESPUESTAS ========== */
 /* ========== ENVIAR RESPUESTAS A GOOGLE SHEETS ========== */
 function enviarRespuestas() {
     // Bloqueamos el botón para evitar que le den click muchas veces
@@ -930,7 +1166,7 @@ function enviarRespuestas() {
         respuestas: respuestas
     };
 
-    // URL DEL SHEETS )
+    // URL DEL SHEETS
     const URL_GOOGLE_SCRIPT = "https://script.google.com/macros/s/AKfycbzgT0EWFYPD9BbJSzlx_TI5eC3bEyeliYJrE7eA4lQM42BDEGvGQBY2Yr69Le_UWOcEtQ/exec"; 
 
     fetch(URL_GOOGLE_SCRIPT, {
@@ -947,6 +1183,9 @@ function enviarRespuestas() {
         document.getElementById("pasoFormulario").classList.add("oculto");
         document.getElementById("pantallaFinal").classList.remove("oculto");
         window.scrollTo({ top: 0, behavior: "smooth" });
+        
+        // Limpiar localStorage después de enviar
+        localStorage.removeItem('opinionesArtesUNAL');
     })
     .catch(error => {
         console.error('Error:', error);
@@ -955,13 +1194,18 @@ function enviarRespuestas() {
     });
 }
 
+/* ========== REINICIAR FORMULARIO ========== */
 function reiniciar() {
+    // Limpiar localStorage
+    localStorage.removeItem('opinionesArtesUNAL');
+    
     // Reiniciar todas las variables
     asignaturas = [];
     respuestas = {};
     indice = 0;
     ratingAsignatura = 0;
     ratingDocente = 0;
+    correoUsuario = "";
     usandoOtroDocente = false;
     
     // Limpiar interfaz
@@ -970,9 +1214,15 @@ function reiniciar() {
     document.getElementById("btnContinuarAsignaturas").disabled = true;
     document.getElementById('correoInstitucional').value = '';
     document.getElementById('correoInstitucional').style.borderColor = '';
+    document.getElementById('buscarAsignatura').value = '';
     document.querySelectorAll('.validation-icon').forEach(icon => icon.style.display = 'none');
     document.getElementById('errorCorreo').style.display = 'none';
     document.getElementById('btnContinuarCorreo').disabled = true;
+    
+    // Restaurar todas las opciones en el select
+    document.querySelectorAll('#selectAsignaturas option').forEach(opcion => {
+        opcion.style.display = 'block';
+    });
     
     // Mostrar paso inicial
     document.getElementById("pantallaFinal").classList.add("oculto");
