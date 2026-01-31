@@ -523,7 +523,6 @@ function filtrarAsignaturas() {
 function normalizarTexto(texto) {
     return texto.normalize("NFD").replace(/[\u0300-\u036f]/g, "");
 }
-/* ========== AGREGAR ASIGNATURA ========== */
 function agregarAsignatura() {
     const val = select.value;
     if (!val || val === "" || val.includes("No se encontraron")) {
@@ -548,10 +547,16 @@ function agregarAsignatura() {
     
     // Limpiar búsqueda
     document.getElementById('buscarAsignatura').value = '';
-    // Restaurar todas las opciones
+    
+    // Restaurar todas las opciones y quitar mensaje de no resultados si existe
     document.querySelectorAll('#selectAsignaturas option').forEach(opcion => {
         opcion.style.display = 'block';
     });
+    
+    const noResultados = document.getElementById('noResultados');
+    if (noResultados) {
+        noResultados.remove();
+    }
     
     // Habilitar botón de continuar si hay al menos una asignatura
     document.getElementById("btnContinuarAsignaturas").disabled = asignaturas.length === 0;
