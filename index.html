@@ -3,49 +3,33 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Optimized Page</title>
+    <title>Formulario de Opiniones</title>
     <link rel="stylesheet" href="styles.css">
-    <script defer src="scripts.js"></script>
 </head>
 <body>
-    <header>
-        <h1>Welcome to the Optimized Page</h1>
-    </header>
-    <main>
-        <section class="lazy-load">
-            <h2>Lazy Loaded Section</h2>
-            <div class="content">
-                <p>This content is loaded lazily to improve performance.</p>
-            </div>
-        </section>
-        <div class="items-container">
-            <div class="item" data-item="1">Item 1</div>
-            <div class="item" data-item="2">Item 2</div>
-            <div class="item" data-item="3">Item 3</div>
-        </div>
-    </main>
-    <footer>
-        <p>&copy; 2026 Optimized Page</p>
-    </footer>
-    <script>
-        // Event Delegation Example
-        document.querySelector('.items-container').addEventListener('click', function(e) {
-            if (e.target && e.target.matches('.item')) {
-                alert('You clicked ' + e.target.textContent);
-            }
-        });
+    <h1>Formulario de Opiniones</h1>
+    <form id="opinionForm">
+        <label for="name">Nombre:</label>
+        <input type="text" id="name" required>
 
-        // Lazy load example
-        const lazyLoadSection = document.querySelector('.lazy-load');
-        const observer = new IntersectionObserver((entries) => {
-            entries.forEach(entry => {
-                if (entry.isIntersecting) {
-                    entry.target.querySelector('.content').innerHTML = '<p>This content has been loaded!</p>'; // Simulating API call or loading content
-                    observer.unobserve(entry.target);
-                }
-            });
+        <label for="comment">Comentario:</label>
+        <textarea id="comment" required></textarea>
+
+        <button type="submit">Enviar</button>
+    </form>
+
+    <div id="opinionsContainer"></div>
+
+    <script>
+        document.getElementById('opinionForm').addEventListener('submit', function(event) {
+            event.preventDefault();
+            const name = document.getElementById('name').value;
+            const comment = document.getElementById('comment').value;
+            const opinionDiv = document.createElement('div');
+            opinionDiv.innerHTML = `<strong>${name}</strong>: ${comment}`;
+            document.getElementById('opinionsContainer').appendChild(opinionDiv);
+            this.reset();
         });
-        observer.observe(lazyLoadSection);
     </script>
 </body>
 </html>
